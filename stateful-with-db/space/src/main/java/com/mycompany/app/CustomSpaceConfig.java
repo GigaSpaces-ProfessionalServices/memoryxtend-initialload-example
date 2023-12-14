@@ -15,12 +15,16 @@
  */
 package com.mycompany.app;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 import javax.sql.DataSource;
 
 import com.gigaspaces.blobstore.rocksdb.config.RocksDBBlobStoreConfigurer;
 import com.gigaspaces.server.blobstore.BlobStoreStorageHandler;
+import com.j_spaces.core.client.SQLQuery;
+import com.mycompany.app.model.Data;
 import org.hibernate.SessionFactory;
 import org.openspaces.core.cluster.ClusterInfo;
 import org.openspaces.core.cluster.ClusterInfoContext;
@@ -89,6 +93,11 @@ public class CustomSpaceConfig extends EmbeddedSpaceBeansConfig {
 
             BlobStoreDataPolicyFactoryBean blobStoreDataPolicyFactoryBean = new BlobStoreDataPolicyFactoryBean();
             blobStoreDataPolicyFactoryBean.setBlobStoreHandler(handler);
+
+            List<SQLQuery> blobStoreCacheQueries = new ArrayList<>();
+            blobStoreCacheQueries.add(new SQLQuery(Data.class, ""));
+            blobStoreDataPolicyFactoryBean.setBlobstoreCacheQueries(blobStoreCacheQueries);
+
             blobStoreDataPolicyFactoryBean.setAvgObjectSizeKB(memXtendAvgObjSizeKB);
             blobStoreDataPolicyFactoryBean.setCacheEntriesPercentage(memXtendCacheEntriesPercent);
 
