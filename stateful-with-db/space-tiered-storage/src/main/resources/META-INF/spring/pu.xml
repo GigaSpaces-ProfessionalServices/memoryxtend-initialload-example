@@ -82,9 +82,11 @@
         that we do not specify here the cluster topology of the Space. It is
         declared by the os-sla:sla element of this pu.xml file.
     -->
-    <os-core:embedded-space id="space" space-name="${sourceSpaceName}" space-data-source="hibernateSpaceDataSource" mirrored="false">
+    <os-core:embedded-space id="space" space-name="${sourceSpaceName}" space-data-source="hibernateSpaceDataSource" mirrored="true">
         <os-core:blob-store-data-policy blob-store-handler="rocksDbBlobstore"
-                    avg-object-size-KB="1200" cache-entries-percentage="100" />
+                    avg-object-size-KB="1200" cache-entries-percentage="100">
+            <os-core:blob-store-cache-query class="com.mycompany.app.model.Data" where="" />
+        </os-core:blob-store-data-policy>
         <os-core:properties>
             <props>
                 <!-- ALL IN CACHE -->
@@ -106,4 +108,3 @@
     <os-core:giga-space id="gigaSpace" space="space" tx-manager="transactionManager"/>
 
 </beans>
-
