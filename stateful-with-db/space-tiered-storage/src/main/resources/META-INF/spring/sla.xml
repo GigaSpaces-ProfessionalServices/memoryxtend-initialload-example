@@ -14,7 +14,93 @@
         The SLA bean also mandates that a primary and a backup won't run under the same
         GSC by setting the maxInstancesPerVM to 1.
     -->
+<!--
     <os-sla:sla cluster-schema="partitioned" number-of-instances="2" number-of-backups="1"
                 max-instances-per-vm="1">
+    </os-sla:sla>
+-->
+    <os-sla:sla cluster-schema="partitioned">
+        <os-sla:instance-SLAs>
+            <os-sla:instance-SLA instance-id="1">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-0-44"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+            <os-sla:instance-SLA instance-id="2">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-14-147"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+            <os-sla:instance-SLA instance-id="3">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-1-56"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+            <os-sla:instance-SLA instance-id="4">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-13-91"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+            <os-sla:instance-SLA instance-id="5">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-0-44"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+            <os-sla:instance-SLA instance-id="6">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-14-147"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+            <os-sla:instance-SLA instance-id="7">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-1-56"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+            <os-sla:instance-SLA instance-id="8">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-13-91"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+            <os-sla:instance-SLA instance-id="9">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-0-44"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+            <os-sla:instance-SLA instance-id="10">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-14-147"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+            <os-sla:instance-SLA instance-id="11">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-1-56"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+            <os-sla:instance-SLA instance-id="12">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-13-91"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+            <os-sla:instance-SLA instance-id="13">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-0-44"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+            <os-sla:instance-SLA instance-id="14">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-1-56"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+            <os-sla:instance-SLA instance-id="15">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-14-147"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+            <os-sla:instance-SLA instance-id="16">
+                <os-sla:requirements>
+                    <os-sla:host ip="ip-172-31-13-91"/>
+                </os-sla:requirements>
+            </os-sla:instance-SLA>
+        </os-sla:instance-SLAs>
     </os-sla:sla>
 </beans>
