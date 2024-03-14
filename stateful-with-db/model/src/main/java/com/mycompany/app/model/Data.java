@@ -12,7 +12,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "t1")
-@SpaceClass
+@SpaceClass(blobstoreEnabled = true)
 public class Data implements java.io.Serializable {
 
     private static final long serialVersionUID = 0L;
