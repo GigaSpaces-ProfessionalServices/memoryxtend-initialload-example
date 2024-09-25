@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.gigaspaces.dev.training</groupId>
+    <artifactId>disttask</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>disttask</name>
+    <parent>
+        <groupId>com.gigaspaces.dev.training</groupId>
+        <artifactId>typeevolution</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>org.gigaspaces</groupId>
+            <artifactId>xap-openspaces</artifactId>
+            <version>${gigaspaces.version}</version>
+            <!-- need to change scope to compile for inclusion of the dependency in the uber.jar -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.gigaspaces.dev.training</groupId>
+            <artifactId>modelv2</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <!-- need to change scope to compile for inclusion of the dependency in the uber.jar -->
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+<!--
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.7.1</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.samples.disttask.TypeEvolutionExample</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+ -->
+        </plugins>
+    </build>
+</project>
