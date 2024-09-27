@@ -4,11 +4,13 @@ import com.gigaspaces.client.iterator.SpaceIterator;
 import com.gigaspaces.client.iterator.SpaceIteratorConfiguration;
 import com.gigaspaces.client.iterator.SpaceIteratorType;
 import com.samples.model.SpaceTypeEvolutionAdapter;
+import com.samples.model.SpaceTypeEvolutionAdapterImpl;
 import com.samples.model.v1.Data;
 import org.openspaces.core.GigaSpace;
 import org.openspaces.core.executor.Task;
 import org.openspaces.core.executor.TaskGigaSpace;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +21,11 @@ public class MyTask implements Task<Integer> {
 
     // the class to process
     Object template;
-    Class clazz;
+    String destClassName;
 
-    MyTask(Object template, Class clazz) {
+    MyTask(Object template, String destClassName) {
         this.template = template;
-        this.clazz = clazz;
+        this.destClassName = destClassName;
     }
 
     // returns the number of objects processed
@@ -31,14 +33,21 @@ public class MyTask implements Task<Integer> {
     public Integer execute() throws Exception {
         int entriesProcessed = 0;
 
+        Class<?> clazz = Class.forName(destClassName);
+        Constructor<?> ctor = clazz.getConstructor(String.class);
+
+
         SpaceIteratorConfiguration spaceIteratorConfiguration = new SpaceIteratorConfiguration()
                 .setIteratorType(SpaceIteratorType.CURSOR)
                 .setBatchSize(100);
 
         SpaceIterator spaceIterator = gigaSpace.iterator(template, spaceIteratorConfiguration);
         while(spaceIterator.hasNext()) {
-            SpaceTypeEvolutionAdapter adapter = (SpaceTypeEvolutionAdapter) spaceIterator.next();
-            adapter.convertType(clazz);
+            Object srcObject = spaceIterator.next();
+            Object destObject = ctor.newInstance(new Object[]{});
+            SpaceTypeEvolutionAdapter adapter = new SpaceTypeEvolutionAdapterImpl();
+            adapter.convertType(srcObject, destObject);
+            gigaSpace.write(destObject);
             entriesProcessed ++;
         }
         return entriesProcessed;
