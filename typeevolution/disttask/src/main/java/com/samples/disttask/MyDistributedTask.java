@@ -13,8 +13,8 @@ public class MyDistributedTask extends MyTask implements DistributedTask<Integer
     private static Logger log = Logger.getLogger(com.samples.disttask.MyDistributedTask.class.getName());
 
     GigaSpace gigaSpace;
-    MyDistributedTask(Object template, Class clazz) {
-        super(template, clazz);
+    MyDistributedTask(Object template, String destClassName) {
+        super(template, destClassName);
     }
 
     @Override

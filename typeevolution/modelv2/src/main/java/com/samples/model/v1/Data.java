@@ -1,6 +1,5 @@
 package com.samples.model.v1;
 
-import com.samples.model.SpaceTypeEvolutionAdapter;
 import com.gigaspaces.annotation.pojo.SpaceClass;
 import com.gigaspaces.annotation.pojo.SpaceId;
 import com.gigaspaces.annotation.pojo.SpaceRouting;
@@ -9,7 +8,7 @@ import java.util.Objects;
 
 
 @SpaceClass
-public class Data implements SpaceTypeEvolutionAdapter, java.io.Serializable {
+public class Data implements java.io.Serializable {
 
 
     private static final long serialVersionUID = 0L;
@@ -73,8 +72,4 @@ public class Data implements SpaceTypeEvolutionAdapter, java.io.Serializable {
                 '}';
     }
 
-    @Override
-    public Object convertType(Class destinationClazz) {
-        return null;
-    }
 }

@@ -26,7 +26,7 @@ public class TypeEvolutionExample {
         log.info("Begin distributed task");
 
         com.samples.model.v1.Data template = new com.samples.model.v1.Data();
-        AsyncFuture<Integer> future = gigaSpace.execute(new MyDistributedTask(template, com.samples.model.v2.Data.class));
+        AsyncFuture<Integer> future = gigaSpace.execute(new MyDistributedTask(template, "com.samples.model.v2.Data"));
         Integer result = future.get();
 
         if (result == null || result == 0) {
