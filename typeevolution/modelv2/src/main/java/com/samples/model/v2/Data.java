@@ -19,6 +19,8 @@ public class Data implements java.io.Serializable {
     private LocalDateTime timestamp;
     private Boolean processed;
 
+    public Data() {}
+
     @SpaceId(autoGenerate = false)
     @SpaceRouting
     public Integer getId() {

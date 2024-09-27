@@ -34,8 +34,8 @@ public class MyTask implements Task<Integer> {
         int entriesProcessed = 0;
 
         Class<?> clazz = Class.forName(destClassName);
-        Constructor<?> ctor = clazz.getConstructor(String.class);
-
+        // get no argument constructor
+        Constructor<?> ctor = clazz.getConstructor();
 
         SpaceIteratorConfiguration spaceIteratorConfiguration = new SpaceIteratorConfiguration()
                 .setIteratorType(SpaceIteratorType.CURSOR)
