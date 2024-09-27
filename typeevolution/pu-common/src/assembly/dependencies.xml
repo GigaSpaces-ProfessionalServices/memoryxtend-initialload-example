@@ -20,7 +20,7 @@
         <!-- non-transitive dependencies -->
         <dependencySet>
             <useTransitiveDependencies>false</useTransitiveDependencies>
-            <outputDirectory>lib</outputDirectory>
+            <outputDirectory>./</outputDirectory>
             <includes>
                 <include>com.gigaspaces.dev.training:model</include>
             </includes>
@@ -29,7 +29,7 @@
         <dependencySet>
             <useTransitiveDependencies>true</useTransitiveDependencies>
             <useTransitiveFiltering>true</useTransitiveFiltering>
-            <outputDirectory>lib</outputDirectory>
+            <outputDirectory>./</outputDirectory>
             <excludes>
                 <!-- exclude>org.hsqldb:hsqldb</exclude -->
             </excludes>

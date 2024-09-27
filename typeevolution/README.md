@@ -5,7 +5,7 @@ Prerequisites
 
 Steps
 
-1. ./gs.sh host run-agent --manager --webui --gsc=4
+1. ./gs.sh host run-agent --manager --webui --gsc=2
 
 2. ./gs.sh pu deploy demo space/target/space-1.0-SNAPSHOT.jar
 

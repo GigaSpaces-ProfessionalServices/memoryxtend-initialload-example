@@ -17,6 +17,8 @@ public class Data implements java.io.Serializable {
     private String message;
     private Boolean processed;
 
+    public Data() {}
+
     @SpaceId(autoGenerate = false)
     @SpaceRouting
     public Integer getId() {
