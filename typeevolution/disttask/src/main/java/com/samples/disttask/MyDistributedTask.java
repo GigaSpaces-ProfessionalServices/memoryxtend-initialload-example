@@ -2,9 +2,15 @@ package com.samples.disttask;
 
 import com.gigaspaces.async.AsyncResult;
 
+import com.gigaspaces.client.iterator.SpaceIterator;
+import com.gigaspaces.client.iterator.SpaceIteratorConfiguration;
+import com.gigaspaces.client.iterator.SpaceIteratorType;
+import com.samples.model.SpaceTypeEvolutionAdapter;
+import com.samples.model.SpaceTypeEvolutionAdapterImpl;
 import org.openspaces.core.GigaSpace;
 import org.openspaces.core.executor.DistributedTask;
 
+import java.lang.reflect.Constructor;
 import java.util.*;
 import java.util.logging.Logger;
 

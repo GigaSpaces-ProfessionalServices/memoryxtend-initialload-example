@@ -29,6 +29,7 @@
         <module>pu-common</module>
         <module>pu-common-after-type-change</module>
         <module>space</module>
+        <module>spacewithbean</module>
     </modules>
     <dependencies>
         <dependency>
