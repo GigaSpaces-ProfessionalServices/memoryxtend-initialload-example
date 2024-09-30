@@ -5,14 +5,12 @@ import com.gigaspaces.client.iterator.SpaceIteratorConfiguration;
 import com.gigaspaces.client.iterator.SpaceIteratorType;
 import com.samples.model.SpaceTypeEvolutionAdapter;
 import com.samples.model.SpaceTypeEvolutionAdapterImpl;
-import com.samples.model.v1.Data;
+
 import org.openspaces.core.GigaSpace;
 import org.openspaces.core.executor.Task;
 import org.openspaces.core.executor.TaskGigaSpace;
 
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MyTask implements Task<Integer> {
 
