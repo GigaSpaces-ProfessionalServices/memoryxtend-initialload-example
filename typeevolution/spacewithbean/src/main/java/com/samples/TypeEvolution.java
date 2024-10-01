@@ -24,13 +24,16 @@ public class TypeEvolution {
 
     private List<String> destClassList;
 
+    private List<String> adapterClassList;
+
     @Resource
     private GigaSpace gigaSpace;
 
-    public TypeEvolution(boolean enabled, List srcClassList, List destClassList) {
+    public TypeEvolution(boolean enabled, List srcClassList, List destClassList, List adapterClassList) {
         this.enabled = enabled;
         this.srcClassList = srcClassList;
         this.destClassList = destClassList;
+        this.adapterClassList = adapterClassList;
     }
 
     public void postConstruct() throws Exception {
@@ -47,9 +50,15 @@ public class TypeEvolution {
             log.warning("The destination class list cannot be null or empty.");
             process = false;
         }
-        if (srcClassList.size() != destClassList.size()) {
-            log.warning(String.format("The size of the source class list is :%d. The size of the destination class list is :%d", srcClassList.size(), destClassList.size()));
-            log.warning(String.format("The sizes of the source class list and destination class list should be equal"));
+        if( adapterClassList == null || adapterClassList.size() == 0 ) {
+            log.warning("The adapter class list cannot be null or empty.");
+            process = false;
+        }
+
+        if (srcClassList.size() != destClassList.size() && srcClassList.size() != adapterClassList.size()) {
+            log.warning(String.format("The size of the source class list is :%d. The size of the destination class list is :%d. The size of the adapter class list is: %d.",
+                    srcClassList.size(), destClassList.size(), adapterClassList.size()));
+            log.warning(String.format("The sizes of the source class list, destination class list, adapter class list should be equal"));
             process = false;
         }
         if (process == false) {
@@ -57,22 +66,27 @@ public class TypeEvolution {
         }
 
         for (int i=0; i < srcClassList.size(); i++) {
-            processClass(srcClassList.get(i), destClassList.get(i));
+            processClass(srcClassList.get(i), destClassList.get(i), adapterClassList.get(i));
         }
 
     }
 
-    private void processClass(String srcClassName, String destClassName) throws Exception {
+    private void processClass(String srcClassName, String destClassName, String adapterClassName) throws Exception {
+        Class<?> srcClazz = Class.forName(srcClassName);
+        // get no argument constructor
+        Constructor<?> srcCtor = srcClazz.getConstructor();
+        Object template = srcCtor.newInstance(new Object[]{});
+
         Class<?> destClazz = Class.forName(destClassName);
         // get no argument constructor
         Constructor<?> destCtor = destClazz.getConstructor();
 
-        Class<?> srcClazz = Class.forName(srcClassName);
+        Class<?> adapterClazz = Class.forName(adapterClassName);
         // get no argument constructor
-        Constructor<?> srcCtor = srcClazz.getConstructor();
+        Constructor<?> adapterCtor = adapterClazz.getConstructor();
+        SpaceTypeEvolutionAdapter adapter = (SpaceTypeEvolutionAdapter) adapterCtor.newInstance(new Object[]{});
 
-        Object template = srcCtor.newInstance(new Object[]{});
-
+        // set up iterator
         SpaceIteratorConfiguration spaceIteratorConfiguration = new SpaceIteratorConfiguration()
                 .setIteratorType(SpaceIteratorType.CURSOR)
                 .setBatchSize(100);
@@ -84,9 +98,9 @@ public class TypeEvolution {
         while(spaceIterator.hasNext()) {
             Object srcObject = spaceIterator.next();
             Object destObject = destCtor.newInstance(new Object[]{});
-            SpaceTypeEvolutionAdapter adapter = new SpaceTypeEvolutionAdapterImpl();
             adapter.convertType(srcObject, destObject);
             gigaSpace.write(destObject);
+            gigaSpace.clear(srcObject);
             entriesProcessed ++;
         }
         log.info(String.format("The number of entries processed is: " + entriesProcessed));

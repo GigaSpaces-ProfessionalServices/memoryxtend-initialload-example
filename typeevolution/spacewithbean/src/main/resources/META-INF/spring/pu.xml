@@ -50,10 +50,15 @@
         <value>com.samples.model.v2.Data</value>
     </util:list>
 
+    <util:list id="adapterClassList" value-type="java.lang.String">
+        <value>com.samples.model.SpaceTypeEvolutionAdapterImpl</value>
+    </util:list>
+
     <bean id="typeEvolution" class="com.samples.TypeEvolution" init-method="postConstruct">
         <constructor-arg value="true" />
         <constructor-arg ref="srcClassList" />
         <constructor-arg ref="destClassList" />
+        <constructor-arg ref="adapterClassList" />
     </bean>
     <!--
         A bean representing a Space. Here we configure an embedded space. Note
