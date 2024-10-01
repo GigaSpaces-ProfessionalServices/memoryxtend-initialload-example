@@ -13,6 +13,8 @@ public class SpaceTypeEvolutionAdapterImpl implements SpaceTypeEvolutionAdapter 
             v2Data.setId(v1Data.getId());
             v2Data.setMessage(v1Data.getMessage());
             v2Data.setProcessed(v1Data.getProcessed());
+
+            // add value for new field
             v2Data.setTimestamp(LocalDateTime.now());
         }
     }
