@@ -34,7 +34,6 @@
         <module>space</module>
         <module>space-tiered-storage</module>
         <module>mirror</module>
-        <module>zipkin</module>
     </modules>
 
     <dependencyManagement>
