@@ -12,7 +12,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
 public class MultithreadedFeeder {
@@ -109,7 +108,7 @@ public class MultithreadedFeeder {
         }
 
         public void write() {
-
+            long insertStartTime = System.currentTimeMillis();
             log.info(String.format("Run id is: %d", runId));
             int numberOfWrites = 0;
             int i = (totalNumberOfThreads * (startId / totalNumberOfThreads)) + (runId - 1);
@@ -151,6 +150,10 @@ public class MultithreadedFeeder {
             }
 
             log.info(String.format("Finished run %d", runId));
+            long endTime = System.currentTimeMillis();
+            long duration = endTime - insertStartTime;
+            log.info(String.format("Total time to write "+ maxObjects +" entries is "+ duration + " in ms run %d", runId));
+            log.info(String.format("Average time to write 1 entries is "+ maxObjects/duration + " in ms run %d", runId));
         }
 
 
