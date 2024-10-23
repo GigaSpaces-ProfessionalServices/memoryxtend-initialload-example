@@ -1,0 +1,34 @@
+space:
+  name: demo
+  # initial load configurations
+  dataSource:
+    enabled: true
+    fetchSize: 100
+  # mirror redolog configurations
+  mirror:
+    enabled: true
+    redoLogCapacity: 6000000
+    bulk-size: 20000 
+    interval-millis: 10000
+    interval-opers: 100000
+  memoryxtend:
+    enabled: true
+    avgObjectSizeKB: 1200
+    cacheEntriesPercentage: 100
+#    main-path: /home/sushil/Sushil/gigaspaces/gigaspaces-xap-enterprise-16.2.1/work/memoryxtend/rocksdb
+    main-path: /home/ubuntu/gigaspaces-xap-enterprise-16.2.1/work/memoryxtend/rocksdb
+  # defined for mirror pu, this should match the space deployment sla
+  partitions: 16
+  ha: false
+# below used for initialload and mirror
+hibernate:
+  dialect: org.hibernate.dialect.SQLServer2012Dialect
+  connection:
+    pool_size: 1000
+    initial_pool_size: 1000
+    pool_validation_interval: 1000
+db:
+  driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  url: jdbc:sqlserver://35.183.119.127:1433;databaseName=piperdb;encrypt=false
+  user: piper
+  password: Piper123*

@@ -6,7 +6,7 @@
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- Note: description is used to infer processing unit type -->
-    <description>pu-type=stateful</description>
+    <description>pu-type=mirror</description>
     <!-- Enable Spring annotation support -->
     <context:annotation-config/>
     <!-- Bootstrap service configuration -->

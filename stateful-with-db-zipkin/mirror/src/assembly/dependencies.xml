@@ -36,8 +36,8 @@
             </excludes>
             <includes>
                 <include>org.hibernate:hibernate-core</include>
-                <include>com.gigaspaces:xap-mx-rocksdb</include>
             </includes>
         </dependencySet>
     </dependencySets>
 </assembly>
+

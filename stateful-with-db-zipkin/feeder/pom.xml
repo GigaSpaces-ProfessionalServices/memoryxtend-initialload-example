@@ -62,6 +62,11 @@
             <version>1.7.26</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.gigaspaces</groupId>
+            <artifactId>xap-reporter</artifactId>
+            <version>16.2.0</version>
+        </dependency>
     </dependencies>
 
 
