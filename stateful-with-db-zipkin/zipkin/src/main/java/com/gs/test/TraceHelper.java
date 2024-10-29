@@ -8,23 +8,10 @@ import io.opentracing.util.GlobalTracer;
 import org.openspaces.core.GigaSpace;
 import org.openspaces.core.GigaSpaceConfigurer;
 import org.openspaces.core.space.SpaceProxyConfigurer;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 import java.util.concurrent.Callable;
 
-@Configuration
 public class TraceHelper {
-
-//    @Value("${spaceName}")
-//    private static String spaceName;
-//    @Value("${zipkinUrl}")
-//    private static String zipkinUrl;
-//    @Value("${zipkinTracerBean}")
-//    private String zipkinTracerBean;
-//    @Value("${zipkinLookupGroups}")
-//    private static String zipkinLookupGroups;
 
     static String spaceName = "";
     static String zipkinTracerBean = "";

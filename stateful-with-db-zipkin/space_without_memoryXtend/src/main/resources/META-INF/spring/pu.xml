@@ -19,9 +19,9 @@
         <property name="properties">
             <props>
                 <prop key="sourceSpaceName">space</prop>
-                <prop key="db.url">jdbc:postgresql://localhost/mydb</prop>
-                <prop key="db.username">scott</prop>
-                <prop key="db.password">tiger</prop>
+                <prop key="db.url">jdbc:sqlserver://52.60.148.224:1433;databaseName=piperdb;encrypt=false</prop>
+                <prop key="db.username">piper</prop>
+                <prop key="db.password">Piper123*</prop>
                 <prop key="hbm2ddl.auto">update</prop>
                 <prop key="hibernateDebug">false</prop>
             </props>
@@ -43,6 +43,7 @@
     <os-remoting:annotation-support />
 
     <!-- initial load -->
+<!--
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
         <property name="url" value="${db.url}"/>
@@ -50,9 +51,9 @@
         <property name="password" value="${db.password}"/>
     </bean>
 
-    <!--
+    &lt;!&ndash;
         Hibernate SessionFactory bean. Uses the pooled data source to connect to the database.
-    -->
+    &ndash;&gt;
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="com.mycompany.app.model"/>
@@ -73,25 +74,27 @@
     <bean id="hibernateSpaceDataSource" class="org.openspaces.persistency.hibernate.DefaultHibernateSpaceDataSourceFactoryBean">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+-->
 
     <!-- end initial load -->
-    <blob-store:rocksdb-blob-store id="rocksDbBlobstore" persistent="true"/>
+<!--    <blob-store:rocksdb-blob-store id="rocksDbBlobstore" persistent="true"/>-->
 
     <!--
         A bean representing a Space. Here we configure an embedded space. Note
         that we do not specify here the cluster topology of the Space. It is
         declared by the os-sla:sla element of this pu.xml file.
     -->
-    <os-core:embedded-space id="space" space-name="${sourceSpaceName}" space-data-source="hibernateSpaceDataSource" mirrored="true">
-        <os-core:blob-store-data-policy blob-store-handler="rocksDbBlobstore"
-                    avg-object-size-KB="1200" cache-entries-percentage="100">
-            <os-core:blob-store-cache-query class="com.mycompany.app.model.Data" where="" />
-        </os-core:blob-store-data-policy>
+<!--    space-data-source="hibernateSpaceDataSource"-->
+    <os-core:embedded-space id="space" space-name="${sourceSpaceName}" mirrored="true">
+<!--        <os-core:blob-store-data-policy blob-store-handler="rocksDbBlobstore"-->
+<!--                    avg-object-size-KB="1200" cache-entries-percentage="100">-->
+<!--            <os-core:blob-store-cache-query class="com.mycompany.app.model.Data" where="" />-->
+<!--        </os-core:blob-store-data-policy>-->
         <os-core:properties>
             <props>
-                <!-- ALL IN CACHE -->
+<!--                &lt;!&ndash; ALL IN CACHE &ndash;&gt;-->
                 <prop key="space-config.engine.cache_policy">1</prop>
-                <!-- memory manager -->
+<!--                &lt;!&ndash; memory manager &ndash;&gt;-->
                 <prop key="space-config.engine.memory_usage.high_watermark_percentage">98</prop>
                 <prop key="space-config.engine.memory_usage.write_only_block_percentage">97</prop>
                 <prop key="space-config.engine.memory_usage.write_only_check_percentage">96</prop>
@@ -100,6 +103,8 @@
             </props>
         </os-core:properties>
     </os-core:embedded-space>
+
+
 
     <!-- Defines a distributed transaction manager.-->
     <os-core:distributed-tx-manager id="transactionManager" />

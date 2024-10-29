@@ -19,7 +19,7 @@
         <property name="properties">
             <props>
                 <prop key="sourceSpaceName">space</prop>
-                <prop key="db.url">jdbc:sqlserver://35.183.119.127:1433;databaseName=piperdb;encrypt=false</prop>
+                <prop key="db.url">jdbc:sqlserver://52.60.148.224:1433;databaseName=piperdb;encrypt=false</prop>
                 <prop key="db.username">piper</prop>
                 <prop key="db.password">Piper123*</prop>
                 <prop key="hbm2ddl.auto">update</prop>

@@ -6,7 +6,10 @@
  
 ## Getting Started
 This package contains a script (demo-start.sh) that automatically builds and deploys GigaSpaces with both a Mirror and a Space. The Space is configured to initially load data from the configured data source, so you can explore the functionality of the GigaSpaces product and build applications on top of it.
-  
+
+## Space code with xml configurations
+Space package contains code with memoryXtend   (for this keep MEMORYXTEND=true in my-app-env.sh)
+space_without_memoryextend package contains code without memoryXtend (for this keep MEMORYXTEND=false in my-app-env.sh)
 
 ### Running demo-start.sh
 This script does the following:

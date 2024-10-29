@@ -32,7 +32,7 @@
         <module>instrumentation</module>
         <module>model</module>
         <module>space</module>
-        <module>space-tiered-storage</module>
+        <module>space_without_memoryXtend</module>
         <module>mirror</module>
     </modules>
 

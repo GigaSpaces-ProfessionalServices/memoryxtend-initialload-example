@@ -65,7 +65,7 @@
         <dependency>
             <groupId>org.gigaspaces</groupId>
             <artifactId>xap-reporter</artifactId>
-            <version>16.2.0</version>
+            <version>${gigaspaces.version}</version>
         </dependency>
     </dependencies>
 

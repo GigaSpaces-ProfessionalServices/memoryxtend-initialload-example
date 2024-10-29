@@ -4,13 +4,15 @@ set -x
 
 . ./my-app-env.sh
 
-#if [ "$MEMORYXTEND" == "true" ]; then
+if [ "$MEMORYXTEND" == "true" ]; then
+  echo "MEMORYXTEND False using pu.properties"
   JAR_FILENAME="../space/target/space-0.1.jar"
   PROP_FILENAME="pu.properties"
-#else
-#  JAR_FILENAME="../space/target/space-0.1.jar"
-#  PROP_FILENAME="my-app-values.yaml"
-#fi
+else
+  echo "MEMORYXTEND False using my-app-values.yaml"
+  JAR_FILENAME="../space_without_memoryXtend/target/space_without_memoryXtend-0.1.jar"
+  PROP_FILENAME="pu.properties"
+fi
 
 if [ "true" == "$SPACE_HA" ]; then
   echo "Deploying space with ha..."
