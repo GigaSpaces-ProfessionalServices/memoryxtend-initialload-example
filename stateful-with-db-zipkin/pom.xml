@@ -29,7 +29,7 @@
 
     <modules>
         <module>feeder</module>
-        <module>instrumentation</module>
+<!--        <module>instrumentation</module>-->
         <module>model</module>
         <module>space</module>
         <module>space_without_memoryXtend</module>
