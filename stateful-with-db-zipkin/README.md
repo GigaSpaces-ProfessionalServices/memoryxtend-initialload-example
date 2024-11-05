@@ -18,3 +18,6 @@ This script does the following:
 2. Starts the service grid.
 3. Deploys the Processing Units (space and mirror).
 
+### Running feeder.sh
+It will update 100k records to Space in the batch of 1k
+If you want to change the above number so update these DEFAULT_NUM_OBJECTS and BATCH_SIZE paramters in MultithreadedFeeder file in feeder module
