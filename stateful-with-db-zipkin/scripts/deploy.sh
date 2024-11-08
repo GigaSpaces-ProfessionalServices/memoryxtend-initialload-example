@@ -9,7 +9,7 @@ if [ "$MEMORYXTEND" == "true" ]; then
   JAR_FILENAME="../space/target/space-0.1.jar"
   PROP_FILENAME="pu.properties"
 else
-  echo "MEMORYXTEND False using my-app-values.yaml"
+  echo "MEMORYXTEND False using pu.properties"
   JAR_FILENAME="../space_without_memoryXtend/target/space_without_memoryXtend-0.1.jar"
   PROP_FILENAME="pu.properties"
 fi
