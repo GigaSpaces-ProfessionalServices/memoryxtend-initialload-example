@@ -79,6 +79,7 @@
                     <archive>
                         <manifest>
                             <mainClass>com.mycompany.app.MultithreadedFeeder</mainClass>
+<!--                            <mainClass>com.mycompany.app.UnquiesceSpace</mainClass>-->
                             <!-- mainClass>com.mycompany.app.Feeder</mainClass -->
                         </manifest>
                     </archive>

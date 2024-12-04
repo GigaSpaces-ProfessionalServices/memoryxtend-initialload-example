@@ -1,5 +1,7 @@
 package com.mycompany.app;
 
+import com.gigaspaces.client.ReadModifiers;
+import com.gigaspaces.client.TakeModifiers;
 import com.mycompany.app.model.Data;
 import org.openspaces.core.GigaSpace;
 import org.openspaces.core.GigaSpaceConfigurer;
@@ -44,7 +46,7 @@ public class MultithreadedFeeder {
 
     // max number of objects in space
 //    private static final int DEFAULT_NUM_OBJECTS = 1_000_000;
-    private static final int DEFAULT_NUM_OBJECTS = 100_000;
+    private static final int DEFAULT_NUM_OBJECTS = 100_00;
     private static final int BATCH_SIZE = 1000;
 
 
@@ -101,75 +103,6 @@ public class MultithreadedFeeder {
         int index = (int) (Math.random() * payloadSize);
         b[index] = (byte) new Random().nextInt(Byte.MAX_VALUE);
     }
-
-//    class ThreadedWriter {
-//        int runId;
-//
-//        ThreadedWriter(Integer id) {
-//            runId = id;
-//        }
-//
-//        public void write() {
-//            long insertStartTime = System.currentTimeMillis();
-//            log.info(String.format("Run id is: %d", runId));
-//            int numberOfWrites = 0;
-//            int i = (totalNumberOfThreads * (startId / totalNumberOfThreads)) + (runId - 1);
-//
-//
-//            while (i < maxObjects) {
-//                    Data data = new Data();
-//                //if( (i % totalNumberOfThreads) + 1 == runId) {
-//                    data.setId(i);
-//                    data.setMessage(String.format("msg  - %d", i));
-//                    modifyPayload();
-//                    data.setPayload(b.clone());
-//                    data.setProcessed(Boolean.FALSE);
-//                    dataList.add(data);
-//
-////                    log.info("dataList.size() -> " + dataList.size());
-//
-//                    if (dataList.size() % 1000 == 0) {
-//
-//                        log.info(String.format("inside dataList.size() %d -> " + dataList.size() ,runId));
-//
-//                        try {
-//                            if (leaseTimeout != 0) {
-////                            gigaSpace.write(data, (long) leaseTimeout);
-//                                gigaSpace.writeMultiple(dataList.toArray(), (long) leaseTimeout);
-//                            } else {
-//                                gigaSpace.writeMultiple(dataList.toArray());
-////                            gigaSpace.write(data);
-//                            }
-//                            numberOfWrites = numberOfWrites + dataList.size();
-//                            dataList.clear();
-//                            numberOfWrites++;
-//                            i += totalNumberOfThreads;
-//                            if (numberOfWrites % writeChunkSize == 0 && sleepInterval != 0) {
-//                                try {
-//                                    Thread.sleep((long) sleepInterval * 1000L);
-//                                } catch (InterruptedException ie) {
-//                                    ie.printStackTrace();
-//                                }
-//                            }
-//                        } catch (RedoLogCapacityExceededException exception) {
-//                            log.info("threadId: " + runId + ", " + exception.getMessage());
-//                            try {
-//                                log.info("Initiating sleep...");
-//                                Thread.sleep((long) sleepIntervalAfterError * 1000L);
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    }
-//                //}
-//            }
-//            log.info(String.format("Finished run %d", runId));
-//            long endTime = System.currentTimeMillis();
-//            long duration = endTime - insertStartTime;
-//            log.info(String.format("Total time to write "+ maxObjects +" entries is "+ duration + " in ms run %d", runId));
-//            log.info(String.format("Average time to write 1 entries is "+ maxObjects/duration + " in ms run %d", runId));
-//        }
-//    }
 
     private static Integer[] parsePartitionId(String partitionIdsValue, int numberOfPartitions) {
 
@@ -238,6 +171,7 @@ public class MultithreadedFeeder {
     }
 
     public static void generateRecords(int numOfObjects) throws Exception {
+
         long TotalStartTime = System.currentTimeMillis();
         List<Data> dataList = new ArrayList<>();
 
@@ -266,7 +200,13 @@ public class MultithreadedFeeder {
         log.info(" ");
         log.info(" ");
 
+        gigaSpace.readById(Data.class,1);
+        gigaSpace.takeById(Data.class,1);
+
+//        Data result = gigaSpace.take(new Data(),0, TakeModifiers.FIFO);
+//        log.info(result.toString());
     }
+
 
     public static void readRecords(int numOfObjects) throws Exception {
         long TotalStartTime = System.currentTimeMillis();
@@ -348,50 +288,24 @@ public class MultithreadedFeeder {
             }
             log.info("Timeout (in seconds): " + timeout);
 
-            generateRecords(maxObjects);
-            readRecords(maxObjects);
-            // check again in case numberOfPartitions was parsed after partitionIds
-            // partitionIds = parsePartitionId(new Integer(partitionId).toString(), 1, numberOfPartitions, 1);
+//            generateRecords(maxObjects);
+//            readRecords(maxObjects);
+
+            Data data = new Data();
+
+            data.setId(1);
+            data.setMessage(String.format("msg  - %d", 1));
+            modifyPayload();
+            data.setPayload(b.clone());
+            data.setProcessed(Boolean.FALSE);
+            gigaSpace.write(data,30000);
 
 
-//            if( partitionIdsValue != null ) {
-//                partitionIds = parsePartitionId(partitionIdsValue, numberOfPartitions);
-//            }
-//            else {
-//                partitionIds = DEFAULT_PARTITION_IDS;
-//            }
-//            log.info("Number of partitions: " + numberOfPartitions);
-//            log.info("Partition(s): " + Arrays.toString(partitionIds));
-//
-//            totalNumberOfThreads = threadCount * numberOfPartitions;
-//
-//            ExecutorService executorService =
-//                    Executors.newFixedThreadPool(totalNumberOfThreads);
-//
-//            for( int i=0; i < threadCount; i++) {
-//                for (int j=0; j< partitionIds.length; j++) {
-//                    int threadId = (i * numberOfPartitions) + partitionIds[j];
-//
-//                    executorService.submit(new Runnable() {
-//                        public void run() {
-//                            try {
-//                                ThreadedWriter writer = feeder.new ThreadedWriter(threadId);
-//                                writer.write();
-//                            }
-//                            catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    });
-//                }
-//            }
-//            try {
-//                Thread.sleep((long) timeout * 1000);   // 3600 * 1000 millis = 1 hour; keep the executorService alive
-//                executorService.shutdown();
-//                executorService.awaitTermination(60, TimeUnit.SECONDS);
-//            } catch (InterruptedException ie) {
-//                ie.printStackTrace();
-//            }
+//            gigaSpace.readById(Data.class,1);
+//            gigaSpace.takeById(Data.class,1);
+
+
+
         } catch (Throwable t) {
             t.printStackTrace();
             ;

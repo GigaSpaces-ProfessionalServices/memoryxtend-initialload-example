@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 
 # sla
-export SPACE_PARTITIONS="16"
-
+export SPACE_PARTITIONS="4"
 export SPACE_HA="false"
 
 #export MAX_INSTANCES_PER_MACHINE="4"
 
 # this value should be consistent with value in my-app-values.yaml file
-export MIRRORED="true"
+export MIRRORED="false"
 
 export COMMAND_HOST="ip-172-31-0-44"
 #export COMMAND_HOST="localhost"
@@ -21,7 +20,7 @@ else
   export GS_MANAGER_SERVERS="$COMMAND_HOST";
 fi
 
-export NUM_SPACE_GSC_PER_SERVER="16"
+export NUM_SPACE_GSC_PER_SERVER="4"
 
 export MEMORYXTEND="true"
 export CLEAN_WORK_DIR="true"
