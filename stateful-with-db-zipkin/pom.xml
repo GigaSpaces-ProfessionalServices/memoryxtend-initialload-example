@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mycompany.app</groupId>
-    <artifactId>my-app</artifactId>
+    <artifactId>my-app-zipkin</artifactId>
     <version>0.1</version>
     <packaging>pom</packaging>
 
@@ -23,17 +23,17 @@
     <repositories>
         <repository>
             <id>org.openspaces</id>
-            <url>http://maven-repository.openspaces.org</url>
+            <url>https://maven-repository.openspaces.org</url>
         </repository>
     </repositories>
 
     <modules>
-        <module>feeder</module>
+        <module>feeder-zipkin</module>
 <!--        <module>instrumentation</module>-->
-        <module>model</module>
-        <module>space</module>
-        <module>space_without_memoryXtend</module>
-        <module>mirror</module>
+        <module>model-zipkin</module>
+        <module>space-zipkin</module>
+        <module>space_without_memoryXtend-zipkin</module>
+        <module>mirror-zipkin</module>
     </modules>
 
     <dependencyManagement>

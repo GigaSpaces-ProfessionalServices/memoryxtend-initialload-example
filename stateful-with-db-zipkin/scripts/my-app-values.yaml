@@ -16,7 +16,7 @@ space:
     avgObjectSizeKB: 1200
     cacheEntriesPercentage: 100
 #    main-path: /home/sushil/Sushil/gigaspaces/gigaspaces-xap-enterprise-16.2.1/work/memoryxtend/rocksdb
-    main-path: /home/ubuntu/gigaspaces-xap-enterprise-16.2.1/work/memoryxtend/rocksdb
+    main-path: /home/ec2-user/gigaspaces-xap-enterprise-16.2.1/work/memoryxtend/rocksdb
   # defined for mirror pu, this should match the space deployment sla
   partitions: 16
   ha: false

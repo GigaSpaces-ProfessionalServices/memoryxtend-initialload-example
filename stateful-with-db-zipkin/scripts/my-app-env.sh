@@ -9,7 +9,7 @@ export SPACE_HA="false"
 # this value should be consistent with value in my-app-values.yaml file
 export MIRRORED="false"
 
-export COMMAND_HOST="ip-172-31-0-44"
+export COMMAND_HOST="ip-10-0-0-39.us-west-2.compute.internal"
 #export COMMAND_HOST="localhost"
 
 # service grid
@@ -26,7 +26,7 @@ export MEMORYXTEND="true"
 export CLEAN_WORK_DIR="true"
 
 
-export GS_HOME="/home/ubuntu/gigaspaces-xap-enterprise-16.2.1"
+export GS_HOME="/home/ec2-user/gigaspaces-xap-enterprise-16.2.1"
 #export GS_HOME="/home/sushil/Sushil/gigaspaces/gigaspaces-xap-enterprise-16.2.1"
 export GS_CLI_VERBOSE="true"
 
@@ -46,7 +46,7 @@ export GS_CLI_OPTIONS="-Xms512m -Xmx512m"
 
 export BASE_GS_GSC_OPTIONS="-XX:+UseG1GC -XX:MaxGCPauseMillis=1000"
 
-export SPACE_GS_GSC_OPTIONS="-Dcom.gs.zones=space -Xms1g -Xmx3g"
+export SPACE_GS_GSC_OPTIONS="-Dcom.gs.zones=space -Xms1g -Xmx10g"
 export MIRROR_GS_GSC_OPTIONS="-Dcom.gs.zones=mirror -Xms1g -Xmx1g"
 
 function display_env_vars() {

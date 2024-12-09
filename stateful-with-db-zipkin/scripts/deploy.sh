@@ -6,11 +6,11 @@ set -x
 
 if [ "$MEMORYXTEND" == "true" ]; then
   echo "MEMORYXTEND False using pu.properties"
-  JAR_FILENAME="../space/target/space-0.1.jar"
+  JAR_FILENAME="../space-zipkin/target/space-zipkin-0.1.jar"
   PROP_FILENAME="pu.properties"
 else
   echo "MEMORYXTEND False using pu.properties"
-  JAR_FILENAME="../space_without_memoryXtend/target/space_without_memoryXtend-0.1.jar"
+  JAR_FILENAME="../space_without_memoryXtend-zipkin/target/space_without_memoryXtend-zipkin-0.1.jar"
   PROP_FILENAME="pu.properties"
 fi
 

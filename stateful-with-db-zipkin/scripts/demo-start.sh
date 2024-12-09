@@ -41,7 +41,11 @@ done
 
 #if [ "true" == "$IS_MANAGER" ]; then
   export GS_GSC_OPTIONS="$BASE_GS_GSC_OPTIONS $SPACE_GS_GSC_OPTIONS"
-  nohup $GS_HOME/bin/gs.sh host run-agent --manager --webui --gsc=$NUM_SPACE_GSC_PER_SERVER > /tmp/grid-console.log 2>&1 &
+#  nohup $GS_HOME/bin/gs.sh host run-agent --manager --webui --gsc=$NUM_SPACE_GSC_PER_SERVER > /tmp/grid-console.log 2>&1 &
+  nohup $GS_HOME/bin/gs.sh host run-agent --auto --webui --gsc=$NUM_SPACE_GSC_PER_SERVER > /tmp/grid-console.log 2>&1 &
+  echo $GS_HOME
+  echo $NUM_SPACE_GSC_PER_SERVER
+
 #else
 #  export GS_GSC_OPTIONS="$BASE_GS_GSC_OPTIONS $SPACE_GS_GSC_OPTIONS"
 #  nohup $GS_HOME/bin/gs.sh host run-agent           --gsc=$NUM_SPACE_GSC_PER_SERVER > /tmp/grid-console.log 2>&1 &
