@@ -503,7 +503,6 @@ public class Main {
         PrintWriter writer = new PrintWriter(fileName, "UTF-8");
         writer.println("Partition : " + partition);
         String headerStr = "Space_Type : Count";
-        ;
         if (isLease.equals("lease")) {
             headerStr += " : Lease_Type_Count";
         }
