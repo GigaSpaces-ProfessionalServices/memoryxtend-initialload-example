@@ -6,6 +6,7 @@
 1. Builds the project.
 2. Starts the service grid.
 3. Deploy the Processing Units (Space with Memory Extend).
+4. Run Feeder
 
 ## Getting Started
 Use following command with RocksDbUtility Jar and Model Class Jar

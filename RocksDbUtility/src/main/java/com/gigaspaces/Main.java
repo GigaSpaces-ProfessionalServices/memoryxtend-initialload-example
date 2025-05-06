@@ -26,12 +26,7 @@ public class Main {
         String partition = "";
         String isLease = "";
         Boolean forceDelete = false;
-//        int i = 0;
-//        for (String s : args) {
-//            System.out.println(i + " - " + s);
-//            i++;
-//        }
-        System.out.println(args.length);
+
         if (args.length < 3) {
             printErrorArgs();
         } else {
@@ -123,15 +118,6 @@ public class Main {
         }
     }
 
-    //    private static Class<?> getModelClassJarClass(String modelJarPath, String ClassName) throws MalformedURLException, ClassNotFoundException {
-//        File jarFile = new File(modelJarPath);
-//        URL jarURL = jarFile.toURI().toURL();
-//        URLClassLoader classLoader = new URLClassLoader(new URL[]{jarURL}, Main.class.getClassLoader());
-//        classLoader.loadClass(ClassName);
-//        Class<?> getClassName = Class.forName(ClassName,true, classLoader);
-//        System.out.println("getClassName -> " + getClassName);
-//        return getClassName;
-//    }
     public static void printErrorArgs() {
         System.out.println("\nFor Write data to file use : java -cp <RocksDbUtility.jar>:<Model_Class.jar> com.gigaspaces.Main WRITE_DATA_TO_FILE <baseRocksDBWorkPath> <spaceName> <partition> Nolease");
         System.out.println("For lease Write data to file use : java -cp <RocksDbUtility.jar>:<Model_Class.jar> com.gigaspaces.Main WRITE_DATA_TO_FILE <baseRocksDBWorkPath> <spaceName> <partition> lease");
@@ -291,8 +277,7 @@ public class Main {
                             if (!superTypeName.equals("java.lang.Object")) {
                                 if (!MetadataKeyClassNameList.contains(superTypeName)) {
                                     serializableSuperTypesNamesClassNameCheckValue = false;
-//                                    System.out.println("superTypeName : " + superTypeName);
-                                    CorrespondingTypeMetadataErrorMsg.put(key, "Error can't create type Description for " + key + ", missing Supper Class " + superTypeName);
+                                    CorrespondingTypeMetadataErrorMsg.put(key, "Error can't create type Description for " + key + ", missing Super Class " + superTypeName);
                                 }
                             }
                         }
@@ -367,8 +352,6 @@ public class Main {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
             String timestamp = sdf.format(new Date());
             String fileName = "output-" + spaceName + "-" + partition + "-" + timestamp + ".txt";
-            System.out.println("fileName -> " + fileName);
-            System.out.println("partition -> " + partition);
 
             writeDataToFile(fileName, typesCount, partition, typesExpiration, isLease, CorrespondingTypeMetadataErrorMsg);
             readFileData(fileName);
@@ -475,7 +458,7 @@ public class Main {
                     } else {
                         System.out.println("Are you sure you want to delete type name - " + ClassName);
                         System.out.println("If yes so use this command with force parameter");
-                        System.out.println("For RockDb Delete Data use : java -cp <RocksDbUtility.jar>:<Model_Class.jar> com.gigaspaces.Main ROCKSDB_DELETE_DATA <baseRocksDBWorkPath> <spaceName> <partition> <ClassName>");
+                        System.out.println("For RockDb Delete Data use : java -cp <RocksDbUtility.jar>:<Model_Class.jar> com.gigaspaces.Main ROCKSDB_DELETE_DATA <baseRocksDBWorkPath> <spaceName> <partition> <ClassName> force");
                         break;
                     }
                 }
